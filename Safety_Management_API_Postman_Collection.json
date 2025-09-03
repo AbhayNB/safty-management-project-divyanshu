@@ -1,0 +1,804 @@
+{
+	"info": {
+		"_postman_id": "safety-management-api-collection",
+		"name": "Safety Management API",
+		"description": "API collection for testing Safety Management System endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "safety-management-system"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						""
+					]
+				},
+				"description": "Health check endpoint to verify API is running"
+			},
+			"response": []
+		},
+		{
+			"name": "Incidents",
+			"item": [
+				{
+					"name": "Get All Incidents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/incidents?skip=0&limit=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"incidents"
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0",
+									"description": "Number of records to skip (pagination)"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Maximum number of records to return"
+								}
+							]
+						},
+						"description": "Retrieve a list of all safety incidents with pagination"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Incident",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"date_time\": \"2025-09-02T14:30:00\",\n  \"location_id\": 1,\n  \"incident_type\": \"Slip/Fall\",\n  \"description\": \"Employee slipped on wet floor in main factory area\",\n  \"injury_severity\": \"Medium\",\n  \"reporter_name\": \"John Smith\",\n  \"status\": \"Open\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/incidents",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"incidents"
+							]
+						},
+						"description": "Create a new safety incident report"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Incident by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/incidents/{{incidentId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"incidents",
+								"{{incidentId}}"
+							]
+						},
+						"description": "Retrieve a specific incident by its ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Incident",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"In Progress\",\n  \"description\": \"Employee slipped on wet floor in main factory area. Investigation started.\",\n  \"injury_severity\": \"Low\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/incidents/{{incidentId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"incidents",
+								"{{incidentId}}"
+							]
+						},
+						"description": "Update an existing incident"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Incident",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/incidents/{{incidentId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"incidents",
+								"{{incidentId}}"
+							]
+						},
+						"description": "Delete a specific incident"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints for managing safety incidents"
+		},
+		{
+			"name": "Locations",
+			"item": [
+				{
+					"name": "Get All Locations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/locations",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"locations"
+							]
+						},
+						"description": "Retrieve all available locations"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Location by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/locations/{{locationId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"locations",
+								"{{locationId}}"
+							]
+						},
+						"description": "Retrieve a specific location by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Location",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"location_name\": \"Main Factory Floor\",\n  \"address\": \"123 Industrial Way\",\n  \"facility_type\": \"Manufacturing\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/locations",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"locations"
+							]
+						},
+						"description": "Create a new location"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Location",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"location_name\": \"Updated Factory Floor\",\n  \"address\": \"123 Updated Industrial Way\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/locations/{{locationId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"locations",
+								"{{locationId}}"
+							]
+						},
+						"description": "Update an existing location"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Location",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/locations/{{locationId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"locations",
+								"{{locationId}}"
+							]
+						},
+						"description": "Delete a specific location"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints for managing locations"
+		},
+		{
+			"name": "Employees",
+			"item": [
+				{
+					"name": "Get All Employees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/employees",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"employees"
+							]
+						},
+						"description": "Retrieve all employees"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Employee by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/employees/{{employeeId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"employees",
+								"{{employeeId}}"
+							]
+						},
+						"description": "Retrieve a specific employee by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Employee",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"employee_name\": \"John Smith\",\n  \"employee_code\": \"EMP001\",\n  \"department\": \"Manufacturing\",\n  \"position\": \"Machine Operator\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/employees",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"employees"
+							]
+						},
+						"description": "Create a new employee record"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Employee",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"employee_name\": \"John Smith Jr.\",\n  \"department\": \"Quality Control\",\n  \"position\": \"Senior Inspector\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/employees/{{employeeId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"employees",
+								"{{employeeId}}"
+							]
+						},
+						"description": "Update an existing employee record"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Employee",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/employees/{{employeeId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"employees",
+								"{{employeeId}}"
+							]
+						},
+						"description": "Delete a specific employee record"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints for managing employees"
+		},
+		{
+			"name": "Safety Training",
+			"item": [
+				{
+					"name": "Get All Training Sessions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/training",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"training"
+							]
+						},
+						"description": "Retrieve all training sessions"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Training Session",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"training_type\": \"Fire Safety\",\n  \"completion_date\": \"2025-09-02\",\n  \"expiry_date\": \"2026-09-02\",\n  \"trainer_name\": \"Safety Officer Mike\",\n  \"participants\": [1, 2, 3]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/training",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"training"
+							]
+						},
+						"description": "Create a new training session"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Training by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/training/{{trainingId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"training",
+								"{{trainingId}}"
+							]
+						},
+						"description": "Retrieve a specific training session"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Training Session",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"training_type\": \"Advanced Fire Safety\",\n  \"trainer_name\": \"Senior Safety Officer Mike\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/training/{{trainingId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"training",
+								"{{trainingId}}"
+							]
+						},
+						"description": "Update a training session"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints for managing safety training"
+		},
+		{
+			"name": "Safety Inspections",
+			"item": [
+				{
+					"name": "Get All Inspections",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/inspections",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"inspections"
+							]
+						},
+						"description": "Retrieve all safety inspections"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Inspection",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"inspection_type\": \"Monthly Safety Check\",\n  \"inspection_date\": \"2025-09-02\",\n  \"inspection_time\": \"10:00:00\",\n  \"location_id\": 1,\n  \"inspector_name\": \"Safety Inspector Jane\",\n  \"notes\": \"Routine monthly safety inspection\",\n  \"status\": \"Scheduled\",\n  \"score\": null\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/inspections",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"inspections"
+							]
+						},
+						"description": "Schedule a new safety inspection"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Inspection by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/inspections/{{inspectionId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"inspections",
+								"{{inspectionId}}"
+							]
+						},
+						"description": "Retrieve a specific inspection"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Inspection",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"Completed\",\n  \"score\": 85,\n  \"notes\": \"Inspection completed. Minor issues found and addressed.\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/inspections/{{inspectionId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"inspections",
+								"{{inspectionId}}"
+							]
+						},
+						"description": "Update an inspection record"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints for managing safety inspections"
+		},
+		{
+			"name": "PPE Compliance",
+			"item": [
+				{
+					"name": "Get All PPE Compliance Records",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/ppe-compliance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"ppe-compliance"
+							]
+						},
+						"description": "Retrieve all PPE compliance records"
+					},
+					"response": []
+				},
+				{
+					"name": "Create PPE Compliance Record",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"location_id\": 1,\n  \"equipment_type\": \"Hard Hat\",\n  \"compliance_rate\": 95,\n  \"violations\": 2\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/ppe-compliance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"ppe-compliance"
+							]
+						},
+						"description": "Create a new PPE compliance record"
+					},
+					"response": []
+				},
+				{
+					"name": "Get PPE Compliance by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/ppe-compliance/{{ppeId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"ppe-compliance",
+								"{{ppeId}}"
+							]
+						},
+						"description": "Retrieve a specific PPE compliance record"
+					},
+					"response": []
+				},
+				{
+					"name": "Update PPE Compliance",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"compliance_rate\": 98,\n  \"violations\": 1\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/ppe-compliance/{{ppeId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"ppe-compliance",
+								"{{ppeId}}"
+							]
+						},
+						"description": "Update a PPE compliance record"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints for managing PPE compliance"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8000",
+			"type": "string",
+			"description": "Base URL for the Safety Management API"
+		},
+		{
+			"key": "incidentId",
+			"value": "1",
+			"type": "string",
+			"description": "Sample incident ID for testing"
+		},
+		{
+			"key": "trainingId",
+			"value": "1",
+			"type": "string",
+			"description": "Sample training ID for testing"
+		},
+		{
+			"key": "inspectionId",
+			"value": "1",
+			"type": "string",
+			"description": "Sample inspection ID for testing"
+		},
+		{
+			"key": "ppeId",
+			"value": "1",
+			"type": "string",
+			"description": "Sample PPE compliance ID for testing"
+		},
+		{
+			"key": "locationId",
+			"value": "1",
+			"type": "string",
+			"description": "Sample location ID for testing"
+		},
+		{
+			"key": "employeeId",
+			"value": "1",
+			"type": "string",
+			"description": "Sample employee ID for testing"
+		}
+	]
+}
